@@ -10,13 +10,13 @@ import {
   ProtectedRoute,
 } from './pages'
 import { Loading } from './components/Loading'
-import Navbar from './components/Navbar'
+import Navigation from './components/Navigation'
 import { useGlobalContext } from './context'
 
 function App() {
   return (
     <Router>
-      <Navbar />
+      <Navigation />
       <Switch>
         <Route exact path='/'>
           <Home />

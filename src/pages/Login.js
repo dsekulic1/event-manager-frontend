@@ -5,6 +5,9 @@ import FormRow from '../components/FormRow'
 import { useGlobalContext } from '../context'
 import useLocalState from '../utils/localState'
 import axios from 'axios'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+
 const url = 'https://event-manager-2021.herokuapp.com'
 
 function Login() {
@@ -44,45 +47,54 @@ function Login() {
   return (
     <>
       <Wrapper className='page'>
-        {alert.show && (
-          <div className={`alert alert-${alert.type}`}>{alert.text}</div>
-        )}
-        <form
-          className={loading ? 'form form-loading' : 'form'}
-          onSubmit={onSubmit}
-        >
-          {/* single form row */}
-          <FormRow
-            type='email'
-            name='email'
-            value={values.email}
-            handleChange={handleChange}
-          />
-          {/* end of single form row */}
-          {/* single form row */}
-          <FormRow
-            type='password'
-            name='password'
-            value={values.password}
-            handleChange={handleChange}
-          />
-          {/* end of single form row */}
-          <button type='submit' className='btn btn-block' disabled={loading}>
-            {loading ? 'Loading...' : 'Login'}
-          </button>
-          <p>
-            Don't have an account?
-            <Link to='/register' className='register-link'>
-              Register
-            </Link>
-          </p>
-        </form>
+        <div className='center'>
+          {alert.show && (
+            <div className={`alert alert-${alert.type}`}>{alert.text}</div>
+          )}
+          <Form
+            className={loading ? 'form form-loading' : 'form'}
+            onSubmit={onSubmit}
+          >
+            <FormRow
+              type='email'
+              name='email'
+              value={values.email}
+              handleChange={handleChange}
+            />
+
+            <FormRow
+              type='password'
+              name='password'
+              value={values.password}
+              handleChange={handleChange}
+            />
+            <Button
+              variant='contained'
+              color='success'
+              type='submit'
+              disabled={loading}
+            >
+              {loading ? 'Loading...' : 'Login'}
+            </Button>
+            <p>
+              Don't have an account?
+              <Link to='/register' className='register-link'>
+                Register
+              </Link>
+            </p>
+          </Form>
+        </div>
       </Wrapper>
     </>
   )
 }
 
 const Wrapper = styled.section`
+  .center {
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+  }
   .alert {
     margin-top: 3rem;
   }
@@ -109,6 +121,10 @@ const Wrapper = styled.section`
   }
   .btn:disabled {
     cursor: not-allowed;
+  }
+  .form {
+    top: 50px;
+    width: fit-content;
   }
 `
 

@@ -34,7 +34,7 @@ const AppProvider = ({ children }) => {
   }
   useEffect(() => {
     //fetchUser()
-  }, [])
+  }, [url])
 
   return (
     <AppContext.Provider

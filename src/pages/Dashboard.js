@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { useGlobalContext } from '../context'
 import axios from 'axios'
-
+import Events from '../components/Events'
 const url = 'https://event-manager-2021.herokuapp.com'
 
 function Dashboard() {
@@ -12,12 +12,12 @@ function Dashboard() {
   const { user } = useGlobalContext()
   const [isLoading, setIsLoading] = useState(true)
   const { name, userId, role } = user
-
+  const removeTask = () => {}
   const fetchTasks = async () => {
     try {
       const { data } = await axios.get(url + '/api/v1/tasks')
       console.log(data)
-      setTasks(data)
+      setTasks(data.tasks)
     } catch (error) {
       console.log(error)
     }
@@ -36,6 +36,7 @@ function Dashboard() {
         <p>
           Your Role : <span>{role}</span>
         </p>
+        <Events tasks={tasks} removeTask={removeTask}></Events>
       </Wrapper>
     </>
   )

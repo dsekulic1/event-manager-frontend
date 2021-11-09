@@ -30,6 +30,7 @@ function App() {
         <ProtectedRoute path='/dashboard' exact>
           <Dashboard />
         </ProtectedRoute>
+
         <Route path='/user/verify-email' exact>
           <Verify />
         </Route>

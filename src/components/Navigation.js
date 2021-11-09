@@ -1,21 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Navbar, Nav, Container } from 'react-bootstrap'
-
+import { useGlobalContext } from '../context'
 const Navigation = () => {
+  const { user, logoutUser } = useGlobalContext()
+
   return (
-    /*
-    <nav>
-      <Link to='/'>
-        <p>Home</p>
-      </Link>
-      <Link to='/register'>
-        <p>Register</p>
-      </Link>
-      <Link to='/login'>
-        <p>login</p>
-      </Link>
-    </nav>*/
     <>
       <Navbar
         bg='dark'
@@ -30,10 +20,20 @@ const Navigation = () => {
             <Nav className='mr-auto'>
               <Nav.Link href='/'>Home</Nav.Link>
             </Nav>
-            <Nav className='ms-auto'>
-              <Nav.Link href='/login'>Login</Nav.Link>
-              <Nav.Link href='/register'>Register</Nav.Link>
-            </Nav>
+            {user ? (
+              <Nav className='ms-auto'>
+                <Nav.Link href='/slack'>Slack</Nav.Link>
+                <Nav.Link href='/email'>Email</Nav.Link>
+                <Nav.Link href='/' onClick={logoutUser}>
+                  Logout
+                </Nav.Link>
+              </Nav>
+            ) : (
+              <Nav className='ms-auto'>
+                <Nav.Link href='/login'>Login</Nav.Link>
+                <Nav.Link href='/register'>Register</Nav.Link>
+              </Nav>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>

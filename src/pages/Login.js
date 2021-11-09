@@ -47,54 +47,47 @@ function Login() {
   return (
     <>
       <Wrapper className='page'>
-        <div className='center'>
-          {alert.show && (
-            <div className={`alert alert-${alert.type}`}>{alert.text}</div>
-          )}
-          <Form
-            className={loading ? 'form form-loading' : 'form'}
-            onSubmit={onSubmit}
-          >
-            <FormRow
-              type='email'
-              name='email'
-              value={values.email}
-              handleChange={handleChange}
-            />
+        {alert.show && (
+          <div className={`alert alert-${alert.type}`}>{alert.text}</div>
+        )}
+        <Form
+          className={loading ? 'form form-loading' : 'form'}
+          onSubmit={onSubmit}
+        >
+          <FormRow
+            type='email'
+            name='email'
+            value={values.email}
+            handleChange={handleChange}
+          />
 
-            <FormRow
-              type='password'
-              name='password'
-              value={values.password}
-              handleChange={handleChange}
-            />
-            <Button
-              variant='contained'
-              color='success'
-              type='submit'
-              disabled={loading}
-            >
-              {loading ? 'Loading...' : 'Login'}
-            </Button>
-            <p>
-              Don't have an account?
-              <Link to='/register' className='register-link'>
-                Register
-              </Link>
-            </p>
-          </Form>
-        </div>
+          <FormRow
+            type='password'
+            name='password'
+            value={values.password}
+            handleChange={handleChange}
+          />
+          <Button
+            variant='contained'
+            color='success'
+            type='submit'
+            disabled={loading}
+          >
+            {loading ? 'Loading...' : 'Login'}
+          </Button>
+          <p>
+            Don't have an account?
+            <Link to='/register' className='register-link'>
+              Register
+            </Link>
+          </p>
+        </Form>
       </Wrapper>
     </>
   )
 }
 
 const Wrapper = styled.section`
-  .center {
-    padding: 50px 0;
-    display: flex;
-    justify-content: center;
-  }
   .alert {
     margin-top: 3rem;
   }
@@ -121,10 +114,6 @@ const Wrapper = styled.section`
   }
   .btn:disabled {
     cursor: not-allowed;
-  }
-  .form {
-    top: 50px;
-    width: fit-content;
   }
 `
 

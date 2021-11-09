@@ -23,7 +23,6 @@ const VerifyPage = () => {
         email: query.get('email'),
       })
     } catch (error) {
-      // console.log(error.response);
       setError(true)
     }
     setLoading(false)

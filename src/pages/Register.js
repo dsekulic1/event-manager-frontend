@@ -1,9 +1,12 @@
 import useLocalState from '../utils/localState'
 import { Link } from 'react-router-dom'
 import FormRow from '../components/FormRow'
+import Form from 'react-bootstrap/Form'
 import { useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
+import Button from 'react-bootstrap/Button'
+
 const url = 'https://event-manager-2021.herokuapp.com'
 const Register = () => {
   console.log(url)
@@ -38,12 +41,15 @@ const Register = () => {
   }
   return (
     <>
-      <Wrapper>
+      <Wrapper className='page'>
         {alert.show && (
           <div className={`alert alert-${alert.type}`}>{alert.text}</div>
         )}
         {!success && (
-          <form onSubmit={onSubmit}>
+          <Form
+            className={loading ? 'form form-loading' : 'form'}
+            onSubmit={onSubmit}
+          >
             <FormRow
               type='name'
               name='name'
@@ -62,16 +68,21 @@ const Register = () => {
               value={values.password}
               handleChange={handleChange}
             />
-            <button type='submit' className='btn btn-block' disabled={loading}>
+            <Button
+              variant='contained'
+              color='success'
+              type='submit'
+              disabled={loading}
+            >
               {loading ? 'Loading...' : 'Register'}
-            </button>
+            </Button>
             <p>
               Already a have an account?
               <Link to='/login' className='login-link'>
                 Log In
               </Link>
             </p>
-          </form>
+          </Form>
         )}
       </Wrapper>
     </>

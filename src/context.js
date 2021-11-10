@@ -5,7 +5,8 @@ const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true)
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState()
+
   const saveUser = (user) => {
     setUser(user)
   }
@@ -23,18 +24,29 @@ const AppProvider = ({ children }) => {
     }
     setIsLoading(false)
   }
+  const clearStorage = () => {
+    window.localStorage.clear()
+    sessionStorage.clear()
+  }
 
   const logoutUser = async () => {
     try {
+      console.log('uso u logout')
+      clearStorage()
       await axios.delete(url + '/api/v1/auth/logout')
       removeUser()
     } catch (error) {
       console.log(error)
     }
   }
+
   useEffect(() => {
-    //fetchUser()
-  }, [url])
+    const loggedInUser = localStorage.getItem('user')
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser)
+      setUser(foundUser)
+    }
+  }, [])
 
   return (
     <AppContext.Provider

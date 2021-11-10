@@ -4,6 +4,7 @@ import { useGlobalContext } from '../context'
 
 const PrivateRoute = ({ children, ...rest }) => {
   const { user } = useGlobalContext()
+
   return (
     <Route
       {...rest}

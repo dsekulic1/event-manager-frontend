@@ -8,10 +8,10 @@ import {
   Verify,
   Dashboard,
   ProtectedRoute,
+  Slack,
+  Email,
 } from './pages'
-import { Loading } from './components/Loading'
 import Navigation from './components/Navigation'
-import { useGlobalContext } from './context'
 
 function App() {
   return (
@@ -30,7 +30,12 @@ function App() {
         <ProtectedRoute path='/dashboard' exact>
           <Dashboard />
         </ProtectedRoute>
-
+        <Route path='/slack' exact>
+          <Slack />
+        </Route>
+        <Route path='/email' exact>
+          <Email />
+        </Route>
         <Route path='/user/verify-email' exact>
           <Verify />
         </Route>

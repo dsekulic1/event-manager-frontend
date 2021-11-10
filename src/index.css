@@ -242,7 +242,17 @@ ul {
     transform: rotate(360deg);
   }
 }
-
+.slackPage {
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ),
+    url('images/slackWal.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
 .loading {
   width: 6rem;
   height: 6rem;

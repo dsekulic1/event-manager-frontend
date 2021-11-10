@@ -1,3 +1,7 @@
+import 'devextreme/dist/css/dx.common.css'
+import 'devextreme/dist/css/dx.light.css'
+import 'devextreme/dist/css/dx.common.css'
+import 'devextreme/dist/css/dx.light.css'
 import './App.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import {
@@ -10,6 +14,7 @@ import {
   ProtectedRoute,
   Slack,
   Email,
+  Calendar,
 } from './pages'
 import Navigation from './components/Navigation'
 
@@ -35,6 +40,9 @@ function App() {
         </Route>
         <Route path='/email' exact>
           <Email />
+        </Route>
+        <Route path='/calendar' exact>
+          <Calendar />
         </Route>
         <Route path='/user/verify-email' exact>
           <Verify />

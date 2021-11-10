@@ -7,6 +7,7 @@ import Dashboard from './Dashboard'
 import ProtectedRoute from './ProtectedRoute'
 import Email from './Email'
 import Slack from './Slack'
+import Calendar from './Calendar'
 export {
   Home,
   Error,
@@ -17,4 +18,5 @@ export {
   ProtectedRoute,
   Email,
   Slack,
+  Calendar,
 }

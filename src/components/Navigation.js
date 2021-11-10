@@ -23,6 +23,7 @@ const Navigation = () => {
               <Nav className='ms-auto'>
                 <Nav.Link href='/slack'>Slack</Nav.Link>
                 <Nav.Link href='/email'>Email</Nav.Link>
+                <Nav.Link href='/calendar'>My calendar</Nav.Link>
                 <Nav.Link href='/' onClick={logoutUser}>
                   Logout
                 </Nav.Link>

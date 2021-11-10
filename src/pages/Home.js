@@ -1,6 +1,7 @@
 import { useGlobalContext } from '../context'
 import { Redirect } from 'react-router-dom'
 import styled from 'styled-components'
+
 function Home() {
   const { user } = useGlobalContext()
   return (

@@ -3,6 +3,7 @@ import { useLocation, Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useGlobalContext } from '../context'
 import axios from 'axios'
+import Loading from '../components/Loading'
 const url = 'https://event-manager-2021.herokuapp.com'
 
 function useQuery() {
@@ -18,7 +19,7 @@ const VerifyPage = () => {
   const verifyToken = async () => {
     setLoading(true)
     try {
-      const { data } = await axios.post(url + '/api/v1/auth/verify-email', {
+      await axios.post(url + '/api/v1/auth/verify-email', {
         verificationToken: query.get('token'),
         email: query.get('email'),
       })
@@ -37,7 +38,7 @@ const VerifyPage = () => {
   if (loading) {
     return (
       <Wrapper className='page'>
-        <h2>Loading...</h2>
+        <Loading></Loading>
       </Wrapper>
     )
   }

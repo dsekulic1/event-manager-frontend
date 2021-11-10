@@ -1,4 +1,3 @@
-import { useGlobalContext } from '../context'
 import styled from 'styled-components'
 import axios from 'axios'
 import Button from 'react-bootstrap/Button'
@@ -7,7 +6,6 @@ import { useState } from 'react'
 const url = 'https://event-manager-2021.herokuapp.com'
 
 function Slack() {
-  const { user } = useGlobalContext()
   const [slackMessage, setSlackMessage] = useState('')
   const handleChange = (e) => {
     setSlackMessage(e.target.value)

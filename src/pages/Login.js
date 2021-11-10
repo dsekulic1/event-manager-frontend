@@ -37,7 +37,8 @@ function Login() {
       })
       setLoading(false)
       saveUser(data.user)
-      localStorage.setItem('user', JSON.stringify(data.user))
+      //localStorage.setItem('user', JSON.stringify(data.user))
+      sessionStorage.setItem('user', JSON.stringify(data.user))
       history.push('/dashboard')
     } catch (error) {
       showAlert({ text: error.response.data.msg })

@@ -15,23 +15,13 @@ const AppProvider = ({ children }) => {
     setUser(null)
   }
 
-  const fetchUser = async () => {
-    try {
-      const { data } = await axios.get(url + `/api/v1/users/showMe`)
-      saveUser(data.user)
-    } catch (error) {
-      removeUser()
-    }
-    setIsLoading(false)
-  }
   const clearStorage = () => {
     window.localStorage.clear()
-    sessionStorage.clear()
+    window.sessionStorage.clear()
   }
 
   const logoutUser = async () => {
     try {
-      console.log('uso u logout')
       clearStorage()
       await axios.delete(url + '/api/v1/auth/logout')
       removeUser()
@@ -41,10 +31,12 @@ const AppProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem('user')
+    // const loggedInUser = localStorage.getItem('user')
+    const loggedInUser = sessionStorage.getItem('user')
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser)
       setUser(foundUser)
+      setIsLoading(false)
     }
   }, [])
 

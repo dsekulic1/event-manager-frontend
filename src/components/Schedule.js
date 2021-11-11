@@ -1,7 +1,7 @@
 import React from 'react'
 import { useCallback, useState } from 'react'
 import { Scheduler, View, Editing } from 'devextreme-react/scheduler'
-import 'devextreme/dist/css/dx.softblue.compact.css'
+import 'devextreme/dist/css/dx.dark.compact.css'
 import Container from 'react-bootstrap/Container'
 const appointments = []
 
@@ -49,38 +49,36 @@ function Schedule() {
   }
 
   return (
-    <Container fluid='xxl' variant='dark'>
-      <Scheduler
-        dataSource={data}
-        textExpr='title'
-        allDayExpr='dayLong'
-        recurrenceRuleExpr='rule'
-        recurrenceExceptionExpr='exception'
-        defaultCurrentView='week'
-        currentDate={currentDate}
-        adaptivityEnabled={true}
-        onOptionChanged={handlePropertyChange}
-        timeZone='Europe/Berlin'
-        onAppointmentAdding={onAppointmentAdding}
-        onAppointmentAdded={onAppointmentAdded}
-        onAppointmentUpdating={onAppointmentUpdating}
-        onAppointmentUpdated={onAppointmentUpdated}
-        onAppointmentDeleting={onAppointmentDeleting}
-        onAppointmentDeleted={onAppointmentDeleted}
-        cellDuration={60}
-        firstDayOfWeek={1}
-      >
-        <View type='day' startDayHour={7} endDayHour={22} />
-        <View type='week' startDayHour={7} endDayHour={22} />
-        <View type='month' />
-        <Editing
-          allowDragging={false}
-          allowAdding={true}
-          allowUpdating={true}
-          allowDeleting={true}
-        />
-      </Scheduler>
-    </Container>
+    <Scheduler
+      dataSource={data}
+      textExpr='title'
+      allDayExpr='dayLong'
+      recurrenceRuleExpr='rule'
+      recurrenceExceptionExpr='exception'
+      defaultCurrentView='week'
+      currentDate={currentDate}
+      adaptivityEnabled={true}
+      onOptionChanged={handlePropertyChange}
+      timeZone='Europe/Berlin'
+      onAppointmentAdding={onAppointmentAdding}
+      onAppointmentAdded={onAppointmentAdded}
+      onAppointmentUpdating={onAppointmentUpdating}
+      onAppointmentUpdated={onAppointmentUpdated}
+      onAppointmentDeleting={onAppointmentDeleting}
+      onAppointmentDeleted={onAppointmentDeleted}
+      cellDuration={60}
+      firstDayOfWeek={1}
+    >
+      <View type='day' startDayHour={7} endDayHour={22} />
+      <View type='week' startDayHour={7} endDayHour={22} />
+      <View type='month' />
+      <Editing
+        allowDragging={false}
+        allowAdding={true}
+        allowUpdating={true}
+        allowDeleting={true}
+      />
+    </Scheduler>
   )
 }
 

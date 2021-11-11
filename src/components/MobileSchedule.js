@@ -19,7 +19,7 @@ var allDayAppointment = [{
     allDay: true
 }];
 */
-function Schedule() {
+function MobileSchedule() {
   const [props, setProps] = useState({
     data: appointments,
     currentDate: new Date(),
@@ -53,11 +53,7 @@ function Schedule() {
     <>
       <Scheduler
         dataSource={data}
-        textExpr='title'
-        allDayExpr='dayLong'
-        recurrenceRuleExpr='rule'
-        recurrenceExceptionExpr='exception'
-        defaultCurrentView='week'
+        defaultCurrentView='day'
         currentDate={currentDate}
         adaptivityEnabled={true}
         onOptionChanged={handlePropertyChange}
@@ -68,16 +64,12 @@ function Schedule() {
         onAppointmentUpdated={onAppointmentUpdated}
         onAppointmentDeleting={onAppointmentDeleting}
         onAppointmentDeleted={onAppointmentDeleted}
-        cellDuration={60}
-        firstDayOfWeek={1}
       >
         <View type='day' startDayHour={7} endDayHour={22} />
-        <View type='week' startDayHour={7} endDayHour={22} />
-        <View type='month' />
         <Editing allowDragging={false} />
       </Scheduler>
     </>
   )
 }
 
-export default Schedule
+export default MobileSchedule

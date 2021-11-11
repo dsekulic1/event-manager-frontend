@@ -1,16 +1,28 @@
 import Schedule from '../components/Schedule'
-import React, { useState } from 'react'
+import MobileSchedule from '../components/MobileSchedule'
+import React, { useState, useEffect } from 'react'
 import Loading from '../components/Loading'
 import styled from 'styled-components'
 function Calendar() {
   const [isLoading, setIsLoading] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  //choose the screen size
+  const handleResize = () => {
+    if (window.innerWidth < 720) {
+      setIsMobile(true)
+    } else {
+      setIsMobile(false)
+    }
+  }
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+  }, [])
   return (
     <>
-      <Wrapper className='page'>
-        {isLoading ? <Loading /> : <Schedule />}{' '}
-      </Wrapper>
+      {isLoading ? <Loading /> : isMobile ? <MobileSchedule /> : <Schedule />}{' '}
     </>
   )
 }
-const Wrapper = styled.section``
+
 export default Calendar

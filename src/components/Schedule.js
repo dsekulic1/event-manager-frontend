@@ -1,8 +1,9 @@
 import React from 'react'
 import { useCallback, useState } from 'react'
+
 import { Scheduler, View, Editing } from 'devextreme-react/scheduler'
-import 'devextreme/dist/css/dx.softblue.compact.css'
-import Container from 'react-bootstrap/Container'
+import 'devextreme/dist/css/dx.dark.css'
+
 const appointments = []
 
 /*
@@ -49,7 +50,7 @@ function Schedule() {
   }
 
   return (
-    <Container fluid='xxl'>
+    <>
       <Scheduler
         dataSource={data}
         textExpr='title'
@@ -80,7 +81,7 @@ function Schedule() {
           allowDeleting={true}
         />
       </Scheduler>
-    </Container>
+    </>
   )
 }
 

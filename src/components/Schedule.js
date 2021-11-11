@@ -1,7 +1,7 @@
 import React from 'react'
 import { useCallback, useState } from 'react'
 import { Scheduler, View, Editing } from 'devextreme-react/scheduler'
-import 'devextreme/dist/css/dx.light.css'
+import 'devextreme/dist/css/dx.dark.css'
 const appointments = []
 
 /*

@@ -12,6 +12,7 @@ const Navigation = () => {
         sticky='top'
         fixed='top'
         collapseOnSelect
+        expand='sm'
       >
         <Container>
           <Navbar.Toggle aria-controls='responsive-navbar-nav' />

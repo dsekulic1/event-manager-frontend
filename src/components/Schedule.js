@@ -1,7 +1,8 @@
 import React from 'react'
 import { useCallback, useState } from 'react'
 import { Scheduler, View, Editing } from 'devextreme-react/scheduler'
-import 'devextreme/dist/css/dx.dark.css'
+import 'devextreme/dist/css/dx.softblue.compact.css'
+import Container from 'react-bootstrap/Container'
 const appointments = []
 
 /*
@@ -48,12 +49,13 @@ function Schedule() {
   }
 
   return (
-    <>
+    <Container fluid='xxl' variant='dark'>
       <Scheduler
         dataSource={data}
         textExpr='title'
         allDayExpr='dayLong'
-        recurrenceRuleExpr='recurrence'
+        recurrenceRuleExpr='rule'
+        recurrenceExceptionExpr='exception'
         defaultCurrentView='week'
         currentDate={currentDate}
         adaptivityEnabled={true}
@@ -78,7 +80,7 @@ function Schedule() {
           allowDeleting={true}
         />
       </Scheduler>
-    </>
+    </Container>
   )
 }
 

@@ -8,6 +8,8 @@ import ProtectedRoute from './ProtectedRoute'
 import Email from './Email'
 import Slack from './Slack'
 import Calendar from './Calendar'
+import ForgotPassword from './ForgotPassword'
+import ResetPassword from './ResetPassword'
 export {
   Home,
   Error,
@@ -19,4 +21,6 @@ export {
   Email,
   Slack,
   Calendar,
+  ForgotPassword,
+  ResetPassword,
 }

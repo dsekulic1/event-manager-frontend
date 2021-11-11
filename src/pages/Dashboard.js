@@ -5,7 +5,7 @@ import axios from 'axios'
 import Events from '../components/Events'
 import Loading from '../components/Loading'
 const url = 'https://event-manager-2021.herokuapp.com'
-
+const tasksUrl = url + '/api/v1/tasks'
 function Dashboard() {
   const [tasks, setTasks] = useState([])
   const { user } = useGlobalContext()

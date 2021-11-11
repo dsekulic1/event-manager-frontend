@@ -15,6 +15,8 @@ import {
   Slack,
   Email,
   Calendar,
+  ForgotPassword,
+  ResetPassword,
 } from './pages'
 import Navigation from './components/Navigation'
 
@@ -44,6 +46,12 @@ function App() {
         <ProtectedRoute path='/calendar' exact>
           <Calendar />
         </ProtectedRoute>
+        <Route path='/user/reset-password/:token' exact>
+          <ResetPassword />
+        </Route>
+        <Route path='/forgot-password' exact>
+          <ForgotPassword />
+        </Route>
         <Route path='/user/verify-email' exact>
           <Verify />
         </Route>

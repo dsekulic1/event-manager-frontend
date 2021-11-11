@@ -11,7 +11,17 @@ function Dashboard() {
   const { user } = useGlobalContext()
   const [isLoading, setIsLoading] = useState(true)
   const { name, userId, role } = user
-  const removeTask = () => {}
+  const deleteTask = async (id) => {
+    await axios
+      .delete(tasksUrl + '/' + id)
+      .then(() => setTasks(tasks.filter((task) => task._id !== id)))
+      .catch((error) => {
+        console.error('There was an error!', error)
+      })
+  }
+  const removeTask = (id) => {
+    deleteTask(id)
+  }
   const fetchTasks = async () => {
     try {
       const { data } = await axios.get(url + '/api/v1/tasks')

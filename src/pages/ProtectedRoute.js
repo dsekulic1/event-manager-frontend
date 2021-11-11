@@ -4,12 +4,12 @@ import { useGlobalContext } from '../context'
 
 const PrivateRoute = ({ children, ...rest }) => {
   const { user } = useGlobalContext()
-
+  const isLogged = Boolean(window.sessionStorage.getItem('user'))
   return (
     <Route
       {...rest}
       render={() => {
-        return user ? children : <Redirect to='/'></Redirect>
+        return isLogged || user ? children : <Redirect to='/'></Redirect>
       }}
     ></Route>
   )

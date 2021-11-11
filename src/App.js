@@ -35,15 +35,15 @@ function App() {
         <ProtectedRoute path='/dashboard' exact>
           <Dashboard />
         </ProtectedRoute>
-        <Route path='/slack' exact>
+        <ProtectedRoute path='/slack' exact>
           <Slack />
-        </Route>
-        <Route path='/email' exact>
+        </ProtectedRoute>
+        <ProtectedRoute path='/email' exact>
           <Email />
-        </Route>
-        <Route path='/calendar' exact>
+        </ProtectedRoute>
+        <ProtectedRoute path='/calendar' exact>
           <Calendar />
-        </Route>
+        </ProtectedRoute>
         <Route path='/user/verify-email' exact>
           <Verify />
         </Route>

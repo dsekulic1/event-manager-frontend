@@ -20,7 +20,24 @@ function Calendar() {
   }, [])
   return (
     <>
-      {isLoading ? <Loading /> : isMobile ? <MobileSchedule /> : <Schedule />}{' '}
+      {isLoading ? (
+        <Loading />
+      ) : isMobile ? (
+        <div
+          tyle={{
+            width: window.innerWidth,
+            height: '90vh',
+            display: 'flex',
+            padding: 0,
+            margin: '0 auto',
+            position: 'absolute',
+          }}
+        >
+          <MobileSchedule />
+        </div>
+      ) : (
+        <Schedule />
+      )}{' '}
     </>
   )
 }

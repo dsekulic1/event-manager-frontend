@@ -3,6 +3,9 @@ import 'devextreme/dist/css/dx.light.css'
 import 'devextreme/dist/css/dx.common.css'
 import 'devextreme/dist/css/dx.light.css'
 import './App.css'
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
+import '@babel/polyfill'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import {
   Home,

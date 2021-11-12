@@ -4,13 +4,7 @@ import { useCallback, useState } from 'react'
 import { Scheduler, View, Editing } from 'devextreme-react/scheduler'
 import 'devextreme/dist/css/dx.dark.css'
 
-const appointments = [
-  {
-    text: 'Meet with a customer',
-    startDate: new Date('2021-11-12T15:00:00.000Z'),
-    endDate: new Date('2021-11-12T16:00:00.000Z'),
-  },
-]
+const appointments = []
 
 /*
 var appointment = [{ 

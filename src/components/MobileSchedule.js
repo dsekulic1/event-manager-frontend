@@ -1,19 +1,13 @@
 import React from 'react'
 import { useCallback, useState } from 'react'
-import '@babel/polyfill'
+
 import { Scheduler, View, Editing } from 'devextreme-react/scheduler'
 import 'devextreme/dist/css/dx.dark.css'
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
-const appointments = [
-  {
-    text: 'Meet with a customer',
-    startDate: new Date('2021-11-12T15:00:00.000Z'),
-    endDate: new Date('2021-11-12T16:00:00.000Z'),
-  },
-]
 
-/*var appointment = [{ 
+const appointments = []
+
+/*
+var appointment = [{ 
     text: "Meet with a customer", 
     startDate: new Date("2021-05-21T15:00:00.000Z"),
     endDate: new Date("2021-05-21T16:00:00.000Z")

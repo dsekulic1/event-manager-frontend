@@ -453,10 +453,10 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 .nav-toggle {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: var(--clr-primary-5);
   background: transparent;
   border-color: transparent;
@@ -472,7 +472,7 @@ nav {
 }
 .links a {
   color: var(--clr-grey-3);
-  font-size: 1rem;
+  font-size: 1.5rem;
   text-transform: capitalize;
   letter-spacing: var(--spacing);
   display: block;
@@ -512,7 +512,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 0.5rem;
   }
   .nav-header {
     padding: 0;

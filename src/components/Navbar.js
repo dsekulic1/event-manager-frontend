@@ -38,7 +38,7 @@ const Navbar = () => {
                     <a
                       href='/'
                       onClick={() => logoutUser()}
-                      style={{ color: 'red', paddingLeft: '2rem' }}
+                      style={{ color: 'red' }}
                     >
                       {text}
                     </a>

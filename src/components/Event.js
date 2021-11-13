@@ -12,9 +12,6 @@ const Event = ({ completed, _id, name, removeTask }) => {
         {name}
       </h5>
       <div className='task-links'>
-        <a className='edit-link'>
-          <i className='fas fa-edit'></i>
-        </a>
         <div className='button-container'>
           <button className='edit-btn'>
             <FaEdit />

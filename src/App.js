@@ -21,7 +21,6 @@ import {
   ForgotPassword,
   ResetPassword,
 } from './pages'
-import Navigation from './components/Navigation'
 import Navbar from './components/Navbar'
 function App() {
   return (

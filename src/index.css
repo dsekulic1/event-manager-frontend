@@ -12,7 +12,12 @@
 html {
   font-size: 100%;
 } /*16px*/
-
+.rbc-month-view {
+  height: 100vh;
+}
+.rbc-calendar {
+  min-height: 580px;
+}
 :root {
   /* colors */
   --primary-100: #e2e0ff;
@@ -327,4 +332,14 @@ ul {
   height: 100%;
   background: rgba(255, 255, 255, 0.6);
   cursor: not-allowed;
+}
+.rbc-month-view {
+  height: 100 vh;
+}
+div.fade.in.modal {
+  display: flex !important;
+}
+
+.modal-dialog {
+  margin: auto;
 }

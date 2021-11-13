@@ -1,75 +1,81 @@
-import React from 'react'
-import { useCallback, useState } from 'react'
+import { Calendar, momentLocalizer, Views } from 'react-big-calendar'
+import 'react-big-calendar/lib/css/react-big-calendar.css'
+import moment from 'moment'
+import React, { useState, useEffect } from 'react'
+import ModalForm from './Modal'
 
-import { Scheduler, View, Editing } from 'devextreme-react/scheduler'
-import 'devextreme/dist/css/dx.dark.css'
-
-const appointments = []
-
-/*
-var appointment = [{ 
-    text: "Meet with a customer", 
-    startDate: new Date("2021-05-21T15:00:00.000Z"),
-    endDate: new Date("2021-05-21T16:00:00.000Z")
-}];
-
-var allDayAppointment = [{
-    text: "Concert",
-    startDate: new Date("2021-07-27T16:00:00.000Z"),
-    allDay: true
-}];
-*/
-function MobileSchedule() {
-  const [props, setProps] = useState({
-    data: appointments,
-    currentDate: new Date(),
+const MyCalendar = () => {
+  const [events, setEvents] = useState([
+    {
+      id: 1,
+      title: 'Board meeting',
+      start: new Date(2021, 10, 13, 13, 0, 0),
+      end: new Date(2021, 10, 13, 15, 0, 0),
+      allDay: false,
+      resourceId: 1,
+    },
+  ])
+  const [isOpen, setIsOpen] = useState(false)
+  const [localizer, setLocalizer] = useState(momentLocalizer(moment))
+  const [values, setValues] = useState({
+    id: Number(new Date().getTime().toString()),
+    title: '',
+    start: '',
+    end: '',
+    allDay: false,
+    resourceId: 1,
   })
-  const handlePropertyChange = useCallback((e) => {
-    setProps({ ...props, [e.name]: e.value })
-  }, [])
 
+  const openModal = () => {
+    setIsOpen(true)
+  }
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+  const setTitle = (title) => {
+    setValues({ ...values, title: title })
+  }
+  const handleEventSet = () => {
+    setEvents([...events, values])
+    setValues({
+      ...values,
+      start: '',
+      end: '',
+      title: '',
+      id: Number(new Date().getTime().toString()),
+    })
+  }
+  const handleSubmit = (title) => {
+    handleClose()
+    setTitle(title)
+  }
   const onAppointmentAdding = (e) => {
-    console.log('adding: ', e)
+    setValues({ ...values, start: new Date(e.start), end: new Date(e.end) })
+    openModal()
   }
-  const onAppointmentAdded = (e) => {
-    console.log(e)
-  }
-  const { data, currentDate } = props
-
-  const onAppointmentUpdating = (e) => {
-    // Handler of the "appointmentUpdating" event
-  }
-  const onAppointmentUpdated = (e) => {
-    // Handler of the "appointmentUpdated" event
-  }
-  const onAppointmentDeleting = (e) => {
-    // Handler of the "appointmentDeleting" event
-  }
-  const onAppointmentDeleted = (e) => {
-    // Handler of the "appointmentDeleted" event
-  }
-
+  useEffect(() => {
+    if (values.title) handleEventSet()
+  }, [values.title])
+  useEffect(() => {
+    setLocalizer(momentLocalizer(moment))
+  }, [])
   return (
     <>
-      <Scheduler
-        dataSource={data}
-        defaultCurrentView='day'
-        currentDate={currentDate}
-        adaptivityEnabled={true}
-        onOptionChanged={handlePropertyChange}
-        timeZone='Europe/Berlin'
-        onAppointmentAdding={onAppointmentAdding}
-        onAppointmentAdded={onAppointmentAdded}
-        onAppointmentUpdating={onAppointmentUpdating}
-        onAppointmentUpdated={onAppointmentUpdated}
-        onAppointmentDeleting={onAppointmentDeleting}
-        onAppointmentDeleted={onAppointmentDeleted}
-      >
-        <View type='day' startDayHour={7} endDayHour={22} />
-        <Editing allowDragging={false} />
-      </Scheduler>
+      {isOpen && (
+        <ModalForm handleClose={handleClose} handleSubmit={handleSubmit} />
+      )}
+      <Calendar
+        localizer={localizer}
+        selectable
+        events={events}
+        defaultView={Views.DAY}
+        onSelectEvent={(event) => alert(event.title)}
+        onSelectSlot={onAppointmentAdding}
+        min={new Date(0, 0, 0, 6, 0, 0)}
+        max={new Date(0, 0, 0, 23, 0, 0)}
+      />
     </>
   )
 }
 
-export default MobileSchedule
+export default MyCalendar

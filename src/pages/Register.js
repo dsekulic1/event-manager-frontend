@@ -9,7 +9,6 @@ import Button from 'react-bootstrap/Button'
 
 const url = 'https://event-manager-2021.herokuapp.com'
 const Register = () => {
-  console.log(url)
   const { alert, showAlert, loading, setLoading, success, setSuccess } =
     useLocalState()
   const [values, setValues] = useState({
@@ -25,14 +24,13 @@ const Register = () => {
     setLoading(true)
     const { name, email, password } = values
     try {
-      const { data } = await axios.post(url + `/api/v1/auth/register`, {
+      await axios.post(url + `/api/v1/auth/register`, {
         name,
         email,
         password,
       })
       setSuccess(true)
       setValues({ name: '', email: '', password: '' })
-      showAlert({ text: data.msg, type: 'success' })
     } catch (error) {
       const { msg } = error.response.data
       showAlert({ text: msg || 'there was an error' })
@@ -69,7 +67,7 @@ const Register = () => {
               handleChange={handleChange}
             />
             <Button
-              variant='contained'
+              variant='primary'
               color='success'
               type='submit'
               disabled={loading}

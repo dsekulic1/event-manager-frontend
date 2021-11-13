@@ -7,12 +7,13 @@ const Navigation = () => {
   return (
     <>
       <Navbar
-        bg='dark'
+        color='DarkBlue'
+        bg='primary'
         variant='dark'
         sticky='top'
         fixed='top'
         collapseOnSelect
-        expand='sm'
+        expand='xl'
       >
         <Container>
           <Navbar.Toggle aria-controls='responsive-navbar-nav' />

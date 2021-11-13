@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import FormRow from '../components/FormRow'
 import axios from 'axios'
 import useLocalState from '../utils/localState'
+import Button from 'react-bootstrap/Button'
 const url = 'https://event-manager-2021.herokuapp.com'
 //const url = 'http://localhost:8080'
 const ForgotPassword = () => {
@@ -58,17 +59,17 @@ const ForgotPassword = () => {
           onSubmit={handleSubmit}
         >
           <h4>Forgot password</h4>
-          {/* single form row */}
+
           <FormRow
             type='email'
             name='email'
             value={email}
             handleChange={handleChange}
           />
-          {/* end of single form row */}
-          <button type='submit' className='btn btn-block' disabled={loading}>
+          <Button variant='primary' type='submit' disabled={loading}>
             {loading ? 'Please Wait...' : 'Get Reset Password Link'}
-          </button>
+          </Button>
+
           <p>
             Already a have an account?
             <Link to='/login' className='login-link'>

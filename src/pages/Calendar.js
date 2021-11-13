@@ -1,10 +1,8 @@
 import Schedule from '../components/Schedule'
 import MobileSchedule from '../components/MobileSchedule'
 import React, { useState, useEffect } from 'react'
-import Loading from '../components/Loading'
-import styled from 'styled-components'
+
 function Calendar() {
-  const [isLoading, setIsLoading] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
   //choose the screen size
@@ -20,9 +18,7 @@ function Calendar() {
   }, [])
   return (
     <>
-      {isLoading ? (
-        <Loading />
-      ) : isMobile ? (
+      {isMobile ? (
         <div
           tyle={{
             width: window.innerWidth,

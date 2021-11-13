@@ -31,10 +31,6 @@ function Login() {
     try {
       const { data } = await axios.post(url + `/api/v1/auth/login`, loginUser)
       setValues({ name: '', email: '', password: '' })
-      showAlert({
-        text: `Welcome, ${data.user.name}. Redirecting to dashboard...`,
-        type: 'success',
-      })
       setLoading(false)
       saveUser(data.user)
       //localStorage.setItem('user', JSON.stringify(data.user))
@@ -70,13 +66,14 @@ function Login() {
             handleChange={handleChange}
           />
           <Button
-            variant='contained'
+            variant='primary'
             color='success'
             type='submit'
             disabled={loading}
           >
             {loading ? 'Loading...' : 'Login'}
           </Button>
+
           <p>
             Don't have an account?
             <Link to='/register' className='register-link'>

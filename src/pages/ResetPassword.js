@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import axios from 'axios'
 import FormRow from '../components/FormRow'
 import useLocalState from '../utils/localState'
+import Button from 'react-bootstrap/Button'
 const url = 'https://event-manager-2021.herokuapp.com'
 //const url = 'http://localhost:8080'
 const ResetPasswordForm = () => {
@@ -55,17 +56,17 @@ const ResetPasswordForm = () => {
           onSubmit={handleSubmit}
         >
           <h4>reset password</h4>
-          {/* single form row */}
+
           <FormRow
             type='password'
             name='password'
             value={password}
             handleChange={handleChange}
           />
-          {/* end of single form row */}
-          <button type='submit' className='btn btn-block' disabled={loading}>
+
+          <Button variant='primary' type='submit' disabled={loading}>
             {loading ? 'Please Wait...' : 'New Password'}
-          </button>
+          </Button>
         </form>
       )}
     </Wrapper>

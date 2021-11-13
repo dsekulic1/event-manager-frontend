@@ -22,11 +22,11 @@ import {
   ResetPassword,
 } from './pages'
 import Navigation from './components/Navigation'
-
+import Navbar from './components/Navbar'
 function App() {
   return (
     <Router>
-      <Navigation />
+      <Navbar />
       <Switch>
         <Route exact path='/'>
           <Home />

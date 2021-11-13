@@ -7,7 +7,7 @@ import ModalForm from './Modal'
 const MyCalendar = () => {
   const [events, setEvents] = useState([
     {
-      id: 1,
+      id: '2A3B2121',
       title: 'Board meeting',
       start: new Date(2021, 10, 13, 13, 0, 0),
       end: new Date(2021, 10, 13, 15, 0, 0),

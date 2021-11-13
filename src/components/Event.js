@@ -1,15 +1,15 @@
 import { FaTrash, FaEdit } from 'react-icons/fa'
 
-const Event = ({ completed, _id, name, removeTask }) => {
+const Event = ({ _id, title, removeTask }) => {
   let divClass = 'single-task'
-  if (completed) divClass = 'single-task task-completed'
+
   return (
     <div className={divClass}>
       <h5>
         <span>
           <i className='far fa-check-circle'></i>
         </span>
-        {name}
+        {title}
       </h5>
       <div className='task-links'>
         <div className='button-container'>

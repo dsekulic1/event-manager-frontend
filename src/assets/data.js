@@ -48,16 +48,16 @@ export const social = [
   {
     id: 1,
     url: 'https://www.facebook.com/davor.sekulic.52',
-    icon: <FaFacebook />,
+    icon: <FaFacebook size={28} />,
   },
   {
     id: 2,
     url: 'https://www.linkedin.com/in/davor-sekuli%C4%87-683895201/',
-    icon: <FaLinkedin />,
+    icon: <FaLinkedin size={28} />,
   },
   {
     id: 3,
     url: 'https://github.com/dsekulic1',
-    icon: <FaGithub />,
+    icon: <FaGithub size={28} />,
   },
 ]

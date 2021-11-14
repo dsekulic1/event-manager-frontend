@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react'
 import { FaBars } from 'react-icons/fa'
 import { social, linksLogged, linksUnLogged } from '../assets/data'
 import { useGlobalContext } from '../context'
+import { FaSignOutAlt } from 'react-icons/fa'
+
 const Navbar = () => {
   const { user, logoutUser } = useGlobalContext()
   const links = user ? linksLogged : linksUnLogged
@@ -35,15 +37,13 @@ const Navbar = () => {
               return (
                 <li key={id}>
                   {text === 'signout' ? (
-                    <a
-                      href='/'
-                      onClick={() => logoutUser()}
-                      style={{ color: 'red' }}
-                    >
-                      {text}
+                    <a href='/' onClick={() => logoutUser()}>
+                      <FaSignOutAlt size={28} color='teal' />
                     </a>
                   ) : (
-                    <a href={url}>{text}</a>
+                    <a href={url} style={{ paddingTop: '1.75px' }}>
+                      {text}
+                    </a>
                   )}
                 </li>
               )

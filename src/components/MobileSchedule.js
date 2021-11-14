@@ -49,6 +49,7 @@ const MyCalendar = () => {
           resourceId: Number(resourceId),
         }
         newData.push(newEvent)
+        return task
       })
       setEvents([...newData])
     } catch (error) {
@@ -56,7 +57,7 @@ const MyCalendar = () => {
     }
     setIsLoading(false)
   }
-  const fetchData = async () => {}
+
   const handleEventSet = async () => {
     try {
       const { title, start, end } = values
@@ -77,7 +78,7 @@ const MyCalendar = () => {
       showAlert({ text: error.response.data.msg })
       // setLoading(false)
     }
-    setEvents([...events, values])
+    // setEvents([...events, values])
     setValues({
       ...values,
       start: '',
@@ -96,15 +97,14 @@ const MyCalendar = () => {
   }
 
   useEffect(() => {
-    fetchTasks()
-  }, [])
-  useEffect(() => {
     if (values.title) handleEventSet()
   }, [values.title])
+
   useEffect(() => {
-    fetchData()
+    fetchTasks()
     setLocalizer(momentLocalizer(moment))
   }, [])
+
   return (
     <>
       {isLoading ? (

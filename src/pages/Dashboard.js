@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import React, { useState } from 'react'
+import React from 'react'
 import { useGlobalContext } from '../context'
 import Events from '../components/Events'
 import Loading from '../components/Loading'

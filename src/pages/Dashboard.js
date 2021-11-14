@@ -23,7 +23,11 @@ function Dashboard() {
             <p>
               Your Role : <span>{role}</span>
             </p>
-            <Events tasks={tasks} removeTask={removeTask}></Events>
+            <Events
+              tasks={tasks}
+              removeTask={removeTask}
+              userId={userId}
+            ></Events>
           </div>
         )}
       </Wrapper>

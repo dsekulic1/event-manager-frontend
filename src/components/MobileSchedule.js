@@ -11,6 +11,7 @@ const url = 'https://event-manager-2021.herokuapp.com'
 const tasksUrl = url + '/api/v1/tasks'
 
 const MyCalendar = () => {
+  const [uId, setUId] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [clickedEvent, setClickedEvent] = useState({
     title: '',
@@ -60,19 +61,25 @@ const MyCalendar = () => {
       const { data } = await axios.get(tasksUrl)
       //setTasks(data.tasks)
       let newData = []
-      data.tasks.map((task) => {
-        const { _id, start, end, title, allDay, resourceId } = task
-        let newEvent = {
-          id: _id,
-          title: title,
-          start: new Date(start),
-          end: new Date(end),
-          allDay: allDay,
-          resourceId: Number(resourceId),
-        }
-        newData.push(newEvent)
-        return task
-      })
+      if (uId) {
+        data.tasks.map((task) => {
+          const { _id, start, end, title, allDay, resourceId, userId } = task
+          if (uId === userId) {
+            let newEvent = {
+              id: _id,
+              title: title,
+              start: new Date(start),
+              end: new Date(end),
+              allDay: allDay,
+              resourceId: Number(resourceId),
+            }
+            newData.push(newEvent)
+          }
+
+          return task
+        })
+      }
+
       setEvents([...newData])
     } catch (error) {
       console.log(error)
@@ -83,7 +90,7 @@ const MyCalendar = () => {
   const handleEventSet = async () => {
     try {
       const { title, start, end } = values
-      const event = { title, start, end }
+      const event = { title, start, end, userId: uId }
       const { data } = await axios.post(url + `/api/v1/tasks`, event)
       const { task } = data
 
@@ -123,7 +130,16 @@ const MyCalendar = () => {
   }, [values.title])
 
   useEffect(() => {
-    fetchTasks()
+    if (uId) fetchTasks()
+  }, [uId])
+
+  useEffect(() => {
+    const loggedInUser = sessionStorage.getItem('user')
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser)
+      const { userId } = foundUser
+      setUId(userId)
+    }
     setLocalizer(momentLocalizer(moment))
   }, [])
 

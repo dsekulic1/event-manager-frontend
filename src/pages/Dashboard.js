@@ -3,7 +3,7 @@ import React from 'react'
 import { useGlobalContext } from '../context'
 import Events from '../components/Events'
 import Loading from '../components/Loading'
-
+import { Redirect } from 'react-router-dom'
 function Dashboard() {
   const { user, tasks, removeTask, isLoading } = useGlobalContext()
 
@@ -11,18 +11,14 @@ function Dashboard() {
 
   return (
     <>
+      {(!user || !name) && <Redirect to='/' />}
       <Wrapper className='page'>
         {isLoading ? (
           <Loading />
         ) : (
           <div>
-            <h2>Hello there, {name}</h2>
-            <p>
-              Your ID : <span>{userId}</span>
-            </p>
-            <p>
-              Your Role : <span>{role}</span>
-            </p>
+            <h2 style={{ textAlign: 'center' }}>Hello there, {name}</h2>
+            <h4 style={{ textAlign: 'center' }}>Your events</h4>
             <Events
               tasks={tasks}
               removeTask={removeTask}

@@ -140,7 +140,9 @@ ul {
   object-fit: cover;
 }
 /* buttons */
-
+.button-container {
+  display: flex;
+}
 .btn {
   cursor: pointer;
   border-radius: var(--borderRadius);

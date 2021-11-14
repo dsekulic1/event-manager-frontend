@@ -373,7 +373,7 @@ form > :last-child {
 
 .single-task {
   margin-top: 0.75rem;
-  padding: 1rem 2.5rem;
+  padding: 0.5rem 1rem;
   background: var(--white);
   border-radius: var(--borderRadius);
   box-shadow: var(--shadow-2);

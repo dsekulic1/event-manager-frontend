@@ -38,7 +38,7 @@ const Navbar = () => {
                 <li key={id}>
                   {text === 'signout' ? (
                     <a href='/' onClick={() => logoutUser()}>
-                      <FaSignOutAlt size={28} color='blue' />
+                      <FaSignOutAlt size={28} />
                     </a>
                   ) : (
                     <a href={url} style={{ paddingTop: '1.75px' }}>

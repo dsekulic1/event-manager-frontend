@@ -39,7 +39,9 @@ const Event = ({ _id, title, start, end, removeTask }) => {
     <div className={divClass}>
       <div style={{ display: 'inline-block', verticalAlign: 'middle' }}>
         <h5 style={{ paddingTop: '15px' }}>{title}</h5>
-        <p style={{ fontSize: '10px', marginTop: '5px' }}>
+        <p
+          style={{ fontSize: '10px', marginTop: '5px', alignItems: 'justify' }}
+        >
           {getOutputDate(start)} to {getOutputDate(end)}{' '}
         </p>
       </div>

@@ -56,7 +56,7 @@ const ModalEvent = ({ clickedEvent, handleUnClicked }) => {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant='secondary' onClick={handleUnClicked}>
+        <Button variant='primary' onClick={handleUnClicked}>
           OK
         </Button>
       </Modal.Footer>

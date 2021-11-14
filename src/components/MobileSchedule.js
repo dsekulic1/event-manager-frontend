@@ -30,6 +30,7 @@ const MyCalendar = () => {
     end: '',
     allDay: false,
     resourceId: 1,
+    userId: uId,
   })
   const handleUnClicked = () => {
     setIsClicked(false)
@@ -58,13 +59,14 @@ const MyCalendar = () => {
   }
   const fetchTasks = async () => {
     try {
+      setIsLoading(true)
       const { data } = await axios.get(tasksUrl)
       //setTasks(data.tasks)
       let newData = []
-      if (uId) {
+      if (uId || values.userId) {
         data.tasks.map((task) => {
           const { _id, start, end, title, allDay, resourceId, userId } = task
-          if (uId === userId) {
+          if (values.userId === userId) {
             let newEvent = {
               id: _id,
               title: title,
@@ -89,8 +91,9 @@ const MyCalendar = () => {
 
   const handleEventSet = async () => {
     try {
+      setIsLoading(true)
       const { title, start, end } = values
-      const event = { title, start, end, userId: uId }
+      const event = { title, start, end, userId: values.userId }
       const { data } = await axios.post(url + `/api/v1/tasks`, event)
       const { task } = data
 
@@ -104,10 +107,12 @@ const MyCalendar = () => {
       }
       setEvents([...events, newEvent])
     } catch (error) {
+      console.log(error)
       showAlert({ text: error.response.data.msg })
       // setLoading(false)
     }
     // setEvents([...events, values])
+    setIsLoading(false)
     setValues({
       ...values,
       start: '',
@@ -139,6 +144,7 @@ const MyCalendar = () => {
       const foundUser = JSON.parse(loggedInUser)
       const { userId } = foundUser
       setUId(userId)
+      setValues({ ...values, userId: userId })
     }
     setLocalizer(momentLocalizer(moment))
   }, [])

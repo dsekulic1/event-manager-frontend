@@ -71,6 +71,7 @@ const AppProvider = ({ children }) => {
         tasks,
         setTasks,
         removeTask,
+        setIsLoading,
       }}
     >
       {children}

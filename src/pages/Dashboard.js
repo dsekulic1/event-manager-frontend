@@ -1,32 +1,45 @@
 import styled from 'styled-components'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useGlobalContext } from '../context'
 import Events from '../components/Events'
 import Loading from '../components/Loading'
 import { Redirect } from 'react-router-dom'
 function Dashboard() {
-  const { user, tasks, removeTask, isLoading } = useGlobalContext()
-
-  const { name, userId, role } = user
-
+  const { tasks, removeTask } = useGlobalContext()
+  const [user, setUser] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
+  useEffect(() => {
+    setIsLoading(true)
+    const loggedInUser = sessionStorage.getItem('user')
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser)
+      setUser(foundUser)
+    }
+    setIsLoading(false)
+  }, [])
+  const { name, userId } = user
   return (
     <>
-      {(!user || !name) && <Redirect to='/msm ' />}
-      <Wrapper className='page'>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <div>
-            <h2 style={{ textAlign: 'center' }}>Hello there, {name}</h2>
-            <h4 style={{ textAlign: 'center' }}>Your events</h4>
-            <Events
-              tasks={tasks}
-              removeTask={removeTask}
-              userId={userId}
-            ></Events>
-          </div>
-        )}
-      </Wrapper>
+      {!isLoading && (
+        <>
+          {!user && <Redirect to='/login' />}
+          <Wrapper className='page'>
+            {isLoading ? (
+              <Loading />
+            ) : (
+              <div>
+                <h2 style={{ textAlign: 'center' }}>Hello there, {name}</h2>
+                <h4 style={{ textAlign: 'center' }}>Your events</h4>
+                <Events
+                  tasks={tasks}
+                  removeTask={removeTask}
+                  userId={userId}
+                ></Events>
+              </div>
+            )}
+          </Wrapper>
+        </>
+      )}
     </>
   )
 }

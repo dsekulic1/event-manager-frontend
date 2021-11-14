@@ -18,7 +18,7 @@ const ModalForm = ({ handleClose, handleSubmit }) => {
   return (
     <Modal show={true} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
+        <Modal.Title>Insert title for event</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <FormRow

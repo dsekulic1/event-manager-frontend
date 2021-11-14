@@ -6,24 +6,46 @@ import ModalForm from './Modal'
 import axios from 'axios'
 import Loading from '../components/Loading'
 import useLocalState from '../utils/localState'
+import ModalEvent from './EventModal'
 const url = 'https://event-manager-2021.herokuapp.com'
 const tasksUrl = url + '/api/v1/tasks'
+
 const MyCalendar = () => {
   const [isLoading, setIsLoading] = useState(true)
-
-  const { alert, showAlert } = useLocalState()
+  const [clickedEvent, setClickedEvent] = useState({
+    title: '',
+    start: '',
+    end: '',
+  })
+  const { showAlert } = useLocalState()
   const [events, setEvents] = useState([])
   const [isOpen, setIsOpen] = useState(false)
+  const [isClicked, setIsClicked] = useState(false)
   const [localizer, setLocalizer] = useState(momentLocalizer(moment))
   const [values, setValues] = useState({
-    id: Number(new Date().getTime().toString()),
+    id: '',
     title: '',
     start: '',
     end: '',
     allDay: false,
     resourceId: 1,
   })
-
+  const handleUnClicked = () => {
+    setIsClicked(false)
+    setClickedEvent({
+      title: '',
+      start: '',
+      end: '',
+    })
+  }
+  const handleClicked = (event) => {
+    setClickedEvent({
+      title: event.title,
+      start: event.start,
+      end: event.end,
+    })
+    setIsClicked(true)
+  }
   const openModal = () => {
     setIsOpen(true)
   }
@@ -114,12 +136,18 @@ const MyCalendar = () => {
           {isOpen && (
             <ModalForm handleClose={handleClose} handleSubmit={handleSubmit} />
           )}
+          {isClicked && (
+            <ModalEvent
+              handleUnClicked={handleUnClicked}
+              clickedEvent={clickedEvent}
+            />
+          )}
           <Calendar
             localizer={localizer}
             selectable
             events={events}
             defaultView={Views.DAY}
-            onSelectEvent={(event) => alert(event.title)}
+            onSelectEvent={(event) => handleClicked(event)}
             onSelectSlot={onAppointmentAdding}
             min={new Date(0, 0, 0, 6, 0, 0)}
             max={new Date(0, 0, 0, 23, 0, 0)}

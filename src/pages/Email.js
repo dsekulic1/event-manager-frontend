@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form'
 import { useState } from 'react'
 const url = 'https://event-manager-2021.herokuapp.com'
 function Email() {
+  const [loading, setLoading] = useState(false)
   const [value, setValue] = useState({
     email: '',
     emailMessage: '',
@@ -12,6 +13,7 @@ function Email() {
 
   const sendEmail = async (e) => {
     e.preventDefault()
+    setLoading(true)
     try {
       const emailMessage = value.emailMessage
       const emailTo = value.email
@@ -23,6 +25,7 @@ function Email() {
       alert(error)
     }
     setValue({ email: '', emailMessage: '' })
+    setLoading(false)
   }
   const handleChange = (e) => {
     setValue({ ...value, [e.target.name]: e.target.value })
@@ -57,8 +60,8 @@ function Email() {
               />
               <Form.Text className='text-muted'>Plesae input email</Form.Text>
             </Form.Group>
-            <Button variant='primary' type='submit'>
-              Send email
+            <Button variant='primary' type='submit' disabled={loading}>
+              {loading ? 'Sending...' : 'Send email'}
             </Button>
           </Form>
         </Wrapper>

@@ -7,12 +7,13 @@ const url = 'https://event-manager-2021.herokuapp.com'
 
 function Slack() {
   const [slackMessage, setSlackMessage] = useState('')
+  const [loading, setLoading] = useState(false)
   const handleChange = (e) => {
     setSlackMessage(e.target.value)
   }
   const sendSlackMessage = async (e) => {
     e.preventDefault()
-    console.log(slackMessage)
+    setLoading(true)
     try {
       const message = slackMessage
       await axios.post(url + '/api/v1/slack', { message })
@@ -21,6 +22,7 @@ function Slack() {
     }
     //await axios.post('/api/v1/slack', { message })
     setSlackMessage('')
+    setLoading(false)
   }
   return (
     <>
@@ -40,8 +42,8 @@ function Slack() {
                 Plesae input text that you want to send on group channel
               </Form.Text>
             </Form.Group>
-            <Button variant='primary' type='submit'>
-              Send message
+            <Button variant='primary' type='submit' disabled={loading}>
+              {loading ? 'Sending...' : 'Send message'}
             </Button>
           </Form>
         </Wrapper>

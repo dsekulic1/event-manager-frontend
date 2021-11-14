@@ -151,31 +151,25 @@ const MyCalendar = () => {
 
   return (
     <>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          {isOpen && (
-            <ModalForm handleClose={handleClose} handleSubmit={handleSubmit} />
-          )}
-          {isClicked && (
-            <ModalEvent
-              handleUnClicked={handleUnClicked}
-              clickedEvent={clickedEvent}
-            />
-          )}
-          <Calendar
-            localizer={localizer}
-            selectable
-            events={events}
-            defaultView={Views.DAY}
-            onSelectEvent={(event) => handleClicked(event)}
-            onSelectSlot={onAppointmentAdding}
-            min={new Date(0, 0, 0, 6, 0, 0)}
-            max={new Date(0, 0, 0, 23, 0, 0)}
-          />
-        </>
+      {isOpen && (
+        <ModalForm handleClose={handleClose} handleSubmit={handleSubmit} />
       )}
+      {isClicked && (
+        <ModalEvent
+          handleUnClicked={handleUnClicked}
+          clickedEvent={clickedEvent}
+        />
+      )}
+      <Calendar
+        localizer={localizer}
+        selectable
+        events={events}
+        defaultView={Views.DAY}
+        onSelectEvent={(event) => handleClicked(event)}
+        onSelectSlot={onAppointmentAdding}
+        min={new Date(0, 0, 0, 6, 0, 0)}
+        max={new Date(0, 0, 0, 23, 0, 0)}
+      />
     </>
   )
 }

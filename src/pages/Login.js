@@ -48,10 +48,7 @@ function Login() {
         {alert.show && (
           <div className={`alert alert-${alert.type}`}>{alert.text}</div>
         )}
-        <Form
-          className={loading ? 'form form-loading' : 'form'}
-          onSubmit={onSubmit}
-        >
+        <Form className='form' onSubmit={onSubmit}>
           <FormRow
             type='email'
             name='email'

@@ -11,7 +11,7 @@ function Dashboard() {
 
   return (
     <>
-      {(!user || !name) && <Redirect to='/' />}
+      {(!user || !name) && <Redirect to='/msm ' />}
       <Wrapper className='page'>
         {isLoading ? (
           <Loading />

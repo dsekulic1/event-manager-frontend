@@ -5,7 +5,7 @@ import Events from '../components/Events'
 import Loading from '../components/Loading'
 import { Redirect } from 'react-router-dom'
 function Dashboard() {
-  const { tasks, removeTask } = useGlobalContext()
+  const { tasks, removeTask, updateTask } = useGlobalContext()
   const [user, setUser] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
@@ -34,6 +34,7 @@ function Dashboard() {
                   tasks={tasks}
                   removeTask={removeTask}
                   userId={userId}
+                  updateTask={updateTask}
                 ></Events>
               </div>
             )}

@@ -19,16 +19,28 @@ const AppProvider = ({ children }) => {
     deleteTask(id)
   }
 
-  const updateTask = (data) => {
-    const arr2 = [data]
-    setTasks(tasks.map((obj) => arr2.find((o) => o._id === obj._id) || obj))
-    console.log(tasks)
+  const updateTask = async (data) => {
+    try {
+      const response = await axios
+        .patch(tasksUrl + '/' + data._id, data)
+        .then(() => {
+          const arr2 = [data]
+          setTasks(
+            tasks.map((obj) => arr2.find((o) => o._id === obj._id) || obj)
+          )
+        })
+      console.log(response)
+    } catch (error) {}
   }
   const fetchTasks = async () => {
     setIsLoading(true)
     try {
       const { data } = await axios.get(tasksUrl)
-      setTasks(data.tasks)
+      setTasks(
+        data.tasks.sort(function (a, b) {
+          return new Date(b.start) - new Date(a.start)
+        })
+      )
     } catch (error) {
       console.log(error)
     }

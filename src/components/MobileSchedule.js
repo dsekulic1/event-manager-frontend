@@ -4,7 +4,6 @@ import moment from 'moment'
 import React, { useState, useEffect } from 'react'
 import ModalForm from './Modal'
 import axios from 'axios'
-import Loading from '../components/Loading'
 import useLocalState from '../utils/localState'
 import ModalEvent from './EventModal'
 const url = 'https://event-manager-2021.herokuapp.com'
@@ -160,16 +159,18 @@ const MyCalendar = () => {
           clickedEvent={clickedEvent}
         />
       )}
-      <Calendar
-        localizer={localizer}
-        selectable
-        events={events}
-        defaultView={Views.DAY}
-        onSelectEvent={(event) => handleClicked(event)}
-        onSelectSlot={onAppointmentAdding}
-        min={new Date(0, 0, 0, 6, 0, 0)}
-        max={new Date(0, 0, 0, 23, 0, 0)}
-      />
+      {!isLoading && (
+        <Calendar
+          localizer={localizer}
+          selectable
+          events={events}
+          defaultView={Views.DAY}
+          onSelectEvent={(event) => handleClicked(event)}
+          onSelectSlot={onAppointmentAdding}
+          min={new Date(0, 0, 0, 6, 0, 0)}
+          max={new Date(0, 0, 0, 23, 0, 0)}
+        />
+      )}
     </>
   )
 }

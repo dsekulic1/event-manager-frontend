@@ -18,7 +18,14 @@ const AppProvider = ({ children }) => {
   const removeTask = (id) => {
     deleteTask(id)
   }
+
+  const updateTask = (data) => {
+    const arr2 = [data]
+    setTasks(tasks.map((obj) => arr2.find((o) => o._id === obj._id) || obj))
+    console.log(tasks)
+  }
   const fetchTasks = async () => {
+    setIsLoading(true)
     try {
       const { data } = await axios.get(tasksUrl)
       setTasks(data.tasks)
@@ -72,6 +79,7 @@ const AppProvider = ({ children }) => {
         setTasks,
         removeTask,
         setIsLoading,
+        updateTask,
       }}
     >
       {children}

@@ -35,10 +35,10 @@ const ForgotPassword = () => {
       return
     }
     try {
-      const { data } = await axios.post(url + '/api/v1/auth/passwordreset', {
+      await axios.post(url + '/api/v1/auth/passwordreset', {
         email,
       })
-      showAlert({ text: data.msg, type: 'success' })
+      showAlert({ text: 'Please check your mail', type: 'success' })
       setSuccess(true)
     } catch (error) {
       showAlert({
@@ -54,10 +54,7 @@ const ForgotPassword = () => {
         <div className={`alert alert-${alert.type}`}>{alert.text}</div>
       )}
       {!success && (
-        <form
-          className={loading ? 'form form-loading' : 'form'}
-          onSubmit={handleSubmit}
-        >
+        <form className={'form'} onSubmit={handleSubmit}>
           <h4>Forgot password</h4>
 
           <FormRow

@@ -51,10 +51,7 @@ const ResetPasswordForm = () => {
         <div className={`alert alert-${alert.type}`}>{alert.text}</div>
       )}
       {!success && (
-        <form
-          className={loading ? 'form form-loading' : 'form'}
-          onSubmit={handleSubmit}
-        >
+        <form className={'form'} onSubmit={handleSubmit}>
           <h4>reset password</h4>
 
           <FormRow

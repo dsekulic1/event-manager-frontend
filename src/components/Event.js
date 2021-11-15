@@ -1,6 +1,6 @@
 import { FaTrash, FaEdit } from 'react-icons/fa'
 
-const Event = ({ _id, title, start, end, removeTask }) => {
+const Event = ({ _id, title, start, end, removeTask, editTask }) => {
   let divClass = 'single-task'
   const getOutputDate = (date) => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
@@ -48,7 +48,7 @@ const Event = ({ _id, title, start, end, removeTask }) => {
 
       <div className='task-links'>
         <div className='button-container'>
-          <button className='edit-btn'>
+          <button className='edit-btn' onClick={() => editTask(_id)}>
             <FaEdit />
           </button>
           <button className='delete-btn' onClick={() => removeTask(_id)}>

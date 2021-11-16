@@ -7,11 +7,12 @@ import axios from 'axios'
 import useLocalState from '../utils/localState'
 import ModalEvent from './EventModal'
 const url = 'https://event-manager-2021.herokuapp.com'
-const tasksUrl = url + '/api/v1/tasks'
+const tasksUrl = url + '/api/v1/tasks/user/'
 
-const MyCalendar = () => {
-  const [uId, setUId] = useState('')
+const MyCalendar = ({ userId }) => {
   const [isLoading, setIsLoading] = useState(true)
+  const [isError, setIsError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
   const [clickedEvent, setClickedEvent] = useState({
     title: '',
     start: '',
@@ -29,7 +30,7 @@ const MyCalendar = () => {
     end: '',
     allDay: false,
     resourceId: 1,
-    userId: uId,
+    userId: userId,
   })
   const handleUnClicked = () => {
     setIsClicked(false)
@@ -57,38 +58,30 @@ const MyCalendar = () => {
     // setValues({ ...values, title: title })
     handleEventSet(title)
   }
-  const getTasks = async () => {
+
+  const getData = async () => {
     try {
       setIsLoading(true)
-      const { data } = await axios.get(tasksUrl)
-      //setTasks(data.tasks)
-      let newData = []
-      if (uId || values.userId) {
-        data.tasks.map((task) => {
-          const { _id, start, end, title, allDay, resourceId, userId } = task
-          if (values.userId === userId) {
-            let newEvent = {
-              id: _id,
-              title: title,
-              start: new Date(start),
-              end: new Date(end),
-              allDay: allDay,
-              resourceId: Number(resourceId),
-            }
-            newData.push(newEvent)
-          }
-
-          return task
+      const { data } = await axios.get(tasksUrl + userId)
+      const newData = []
+      data.tasks.map((task) => {
+        newData.push({
+          id: task._id,
+          title: task.title,
+          start: new Date(task.start),
+          end: new Date(task.end),
+          allDay: task.allDay,
+          resourceId: Number(task.resourceId),
         })
-      }
-
+        return task
+      })
       setEvents([...newData])
     } catch (error) {
-      console.log(error)
+      setIsError(true)
+      setErrorMessage(error.msg)
     }
     setIsLoading(false)
   }
-
   const handleEventSet = async (title) => {
     try {
       setIsLoading(true)
@@ -107,11 +100,8 @@ const MyCalendar = () => {
       }
       setEvents([...events, newEvent])
     } catch (error) {
-      console.log(error)
       showAlert({ text: error.response.data.msg })
-      // setLoading(false)
     }
-    // setEvents([...events, values])
     setIsLoading(false)
     setValues({
       ...values,
@@ -131,22 +121,13 @@ const MyCalendar = () => {
   }
 
   useEffect(() => {
-    uId && getTasks()
-  }, [uId])
-
-  useEffect(() => {
-    const loggedInUser = sessionStorage.getItem('user')
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser)
-      const { userId } = foundUser
-      setUId(userId)
-      setValues({ userId: userId })
-    }
+    getData()
     setLocalizer(momentLocalizer(moment))
   }, [])
 
   return (
     <>
+      {isError && showAlert({ text: errorMessage })}
       {isOpen && (
         <ModalForm handleClose={handleClose} handleSubmit={handleSubmit} />
       )}

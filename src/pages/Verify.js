@@ -16,24 +16,21 @@ const VerifyPage = () => {
   const { isLoading } = useGlobalContext()
   const query = useQuery()
 
-  const verifyToken = async () => {
-    setLoading(true)
-    try {
-      await axios.post(url + '/api/v1/auth/verify-email', {
-        verificationToken: query.get('token'),
-        email: query.get('email'),
-      })
-    } catch (error) {
-      setError(true)
-    }
-    setLoading(false)
-  }
-
   useEffect(() => {
-    if (!isLoading) {
-      verifyToken()
+    const verifyToken = async () => {
+      setLoading(true)
+      try {
+        await axios.post(url + '/api/v1/auth/verify-email', {
+          verificationToken: query.get('token'),
+          email: query.get('email'),
+        })
+      } catch (error) {
+        setError(true)
+      }
+      setLoading(false)
     }
-  }, [])
+    !isLoading && verifyToken()
+  }, [isLoading, query])
 
   if (loading) {
     return (

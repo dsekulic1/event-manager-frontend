@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import Event from './Event'
-import axios from 'axios'
 import EditEventModal from './EditEventModal'
-const url = 'https://event-manager-2021.herokuapp.com'
-const tasksUrl = url + '/api/v1/tasks'
 
 const Events = ({ tasks, removeTask, userId, updateTask }) => {
   const [isOpenEditModal, setIsOpenEditModal] = useState(false)
@@ -33,8 +30,9 @@ const Events = ({ tasks, removeTask, userId, updateTask }) => {
       ) : (
         <section>
           {tasks.map((task) => {
-            if (task.userId === userId)
-              return (
+            // if ()
+            return (
+              task.userId === userId && (
                 <Event
                   key={task._id}
                   {...task}
@@ -42,6 +40,7 @@ const Events = ({ tasks, removeTask, userId, updateTask }) => {
                   editTask={editTask}
                 />
               )
+            )
           })}
         </section>
       )}

@@ -55,7 +55,7 @@ const Navbar = () => {
             const { id, url, icon } = socialIcon
             return (
               <li key={id}>
-                <a href={url} target='_blank'>
+                <a href={url} rel='noreferrer noopener' target='_blank'>
                   {icon}
                 </a>
               </li>

@@ -3,12 +3,15 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import React, { useState } from 'react'
 import FormRow from '../components/FormRow'
+import Datetime from 'react-datetime'
+import 'react-datetime/css/react-datetime.css'
+
 const EditEventModal = ({ event, closeEventModal, submitEventModal }) => {
   const [values, setValues] = useState({
     _id: event._id,
     title: event.title,
-    start: event.start,
-    end: event.end,
+    start: new Date(event.start),
+    end: new Date(event.end),
     allDay: event.allDay,
     resource: event.resource,
     userId: event.userId,
@@ -16,6 +19,9 @@ const EditEventModal = ({ event, closeEventModal, submitEventModal }) => {
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
+  }
+  const handleDate = (e) => {
+    setValues({ ...values, start: new Date(e._d) })
   }
   function myFunction() {
     submitEventModal(values)
@@ -33,6 +39,15 @@ const EditEventModal = ({ event, closeEventModal, submitEventModal }) => {
           name='title'
           value={values.title}
           handleChange={handleChange}
+        />
+        <Datetime
+          name='start'
+          value={new Date(values.start)}
+          onChange={handleDate}
+          timeConstraints={{
+            hours: { min: 7, max: 23, step: 1 },
+            minutes: { step: 30 },
+          }}
         />
       </Modal.Body>
 

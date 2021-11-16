@@ -54,9 +54,10 @@ const MyCalendar = () => {
     setIsOpen(false)
   }
   const setTitle = (title) => {
-    setValues({ ...values, title: title })
+    // setValues({ ...values, title: title })
+    handleEventSet(title)
   }
-  const fetchTasks = async () => {
+  const getTasks = async () => {
     try {
       setIsLoading(true)
       const { data } = await axios.get(tasksUrl)
@@ -88,10 +89,10 @@ const MyCalendar = () => {
     setIsLoading(false)
   }
 
-  const handleEventSet = async () => {
+  const handleEventSet = async (title) => {
     try {
       setIsLoading(true)
-      const { title, start, end } = values
+      const { start, end } = values
       const event = { title, start, end, userId: values.userId }
       const { data } = await axios.post(url + `/api/v1/tasks`, event)
       const { task } = data
@@ -130,11 +131,7 @@ const MyCalendar = () => {
   }
 
   useEffect(() => {
-    if (values.title) handleEventSet()
-  }, [values.title])
-
-  useEffect(() => {
-    if (uId) fetchTasks()
+    uId && getTasks()
   }, [uId])
 
   useEffect(() => {
@@ -143,7 +140,7 @@ const MyCalendar = () => {
       const foundUser = JSON.parse(loggedInUser)
       const { userId } = foundUser
       setUId(userId)
-      setValues({ ...values, userId: userId })
+      setValues({ userId: userId })
     }
     setLocalizer(momentLocalizer(moment))
   }, [])

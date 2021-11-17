@@ -21,15 +21,10 @@ const AppProvider = ({ children }) => {
 
   const updateTask = async (data) => {
     try {
-      const response = await axios
-        .patch(tasksUrl + '/' + data._id, data)
-        .then(() => {
-          const arr2 = [data]
-          setTasks(
-            tasks.map((obj) => arr2.find((o) => o._id === obj._id) || obj)
-          )
-        })
-      console.log(response)
+      await axios.patch(tasksUrl + '/' + data._id, data).then(() => {
+        const arr2 = [data]
+        setTasks(tasks.map((obj) => arr2.find((o) => o._id === obj._id) || obj))
+      })
     } catch (error) {}
   }
   const fetchTasks = async () => {

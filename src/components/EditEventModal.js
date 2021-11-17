@@ -20,8 +20,11 @@ const EditEventModal = ({ event, closeEventModal, submitEventModal }) => {
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
-  const handleDate = (e) => {
+  const handleStartChanged = (e) => {
     setValues({ ...values, start: new Date(e._d) })
+  }
+  const handleEndChanged = (e) => {
+    setValues({ ...values, end: new Date(e._d) })
   }
   function myFunction() {
     submitEventModal(values)
@@ -40,15 +43,30 @@ const EditEventModal = ({ event, closeEventModal, submitEventModal }) => {
           value={values.title}
           handleChange={handleChange}
         />
-        <Datetime
-          name='start'
-          value={new Date(values.start)}
-          onChange={handleDate}
-          timeConstraints={{
-            hours: { min: 7, max: 23, step: 1 },
-            minutes: { step: 30 },
-          }}
-        />
+        <div className='form-row'>
+          <label className='form-label'>Start:</label>
+          <Datetime
+            name='start'
+            value={new Date(values.start)}
+            onChange={handleStartChanged}
+            timeConstraints={{
+              hours: { min: 7, max: 23, step: 1 },
+              minutes: { step: 30 },
+            }}
+          />
+        </div>
+        <div className='form-row'>
+          <label className='form-label'>End:</label>
+          <Datetime
+            name='end'
+            value={new Date(values.end)}
+            onChange={handleEndChanged}
+            timeConstraints={{
+              hours: { min: 7, max: 23, step: 1 },
+              minutes: { step: 30 },
+            }}
+          />
+        </div>
       </Modal.Body>
 
       <Modal.Footer>

@@ -24,12 +24,12 @@ const EditEventModal = ({ event, closeEventModal, submitEventModal }) => {
   }
   const handleStartChanged = (e) => {
     const newStart = new Date(e._d)
-    if (!newStart >= values.end) setValues({ ...values, start: newStart })
+    if (newStart < values.end) setValues({ ...values, start: newStart })
     else showAlert({ text: 'Start can not be after end' })
   }
   const handleEndChanged = (e) => {
     const newEnd = new Date(e._d)
-    if (!newEnd <= values.start) setValues({ ...values, end: newEnd })
+    if (newEnd > values.start) setValues({ ...values, end: newEnd })
     else showAlert({ text: 'End can not be before start' })
   }
   function myFunction() {

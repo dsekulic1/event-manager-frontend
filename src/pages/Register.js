@@ -1,5 +1,5 @@
 import useLocalState from '../utils/localState'
-import { Link } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import FormRow from '../components/FormRow'
 import Form from 'react-bootstrap/Form'
 import { useState } from 'react'
@@ -9,8 +9,10 @@ import Button from 'react-bootstrap/Button'
 
 const url = 'https://event-manager-2021.herokuapp.com'
 const Register = () => {
+  const history = useHistory()
   const { alert, showAlert, loading, setLoading, success, setSuccess } =
     useLocalState()
+
   const [values, setValues] = useState({
     name: '',
     email: '',
@@ -31,6 +33,13 @@ const Register = () => {
       })
       setSuccess(true)
       setValues({ name: '', email: '', password: '' })
+      showAlert({
+        text: `Success, redirecting to login page shortly`,
+        type: 'success',
+      })
+      setTimeout(() => {
+        history.push('/login')
+      }, 3000)
     } catch (error) {
       const { msg } = error.response.data
       showAlert({ text: msg || 'there was an error' })
@@ -44,10 +53,7 @@ const Register = () => {
           <div className={`alert alert-${alert.type}`}>{alert.text}</div>
         )}
         {!success && (
-          <Form
-            className={loading ? 'form form-loading' : 'form'}
-            onSubmit={onSubmit}
-          >
+          <Form className='form' onSubmit={onSubmit}>
             <FormRow
               type='name'
               name='name'

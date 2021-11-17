@@ -5,8 +5,10 @@ import React, { useState } from 'react'
 import FormRow from '../components/FormRow'
 import Datetime from 'react-datetime'
 import 'react-datetime/css/react-datetime.css'
-
+import Alert from 'react-bootstrap/Alert'
+import useLocalState from '../utils/localState'
 const EditEventModal = ({ event, closeEventModal, submitEventModal }) => {
+  const { alert, showAlert } = useLocalState()
   const [values, setValues] = useState({
     _id: event._id,
     title: event.title,
@@ -21,10 +23,14 @@ const EditEventModal = ({ event, closeEventModal, submitEventModal }) => {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
   const handleStartChanged = (e) => {
-    setValues({ ...values, start: new Date(e._d) })
+    const newStart = new Date(e._d)
+    if (!newStart >= values.end) setValues({ ...values, start: newStart })
+    else showAlert({ text: 'Start can not be after end' })
   }
   const handleEndChanged = (e) => {
-    setValues({ ...values, end: new Date(e._d) })
+    const newEnd = new Date(e._d)
+    if (!newEnd <= values.start) setValues({ ...values, end: newEnd })
+    else showAlert({ text: 'End can not be before start' })
   }
   function myFunction() {
     submitEventModal(values)
@@ -37,6 +43,12 @@ const EditEventModal = ({ event, closeEventModal, submitEventModal }) => {
       </Modal.Header>
 
       <Modal.Body>
+        {alert.show && (
+          <div className='alert'>
+            <Alert variant={alert.type}>{alert.text}</Alert>
+          </div>
+        )}
+
         <FormRow
           type='text'
           name='title'

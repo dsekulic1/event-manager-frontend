@@ -345,3 +345,8 @@ div.fade.in.modal {
 .modal-dialog {
   margin: auto;
 }
+.alert {
+  width: 100%;
+  padding-right: 0px;
+  padding-left: 0px;
+}

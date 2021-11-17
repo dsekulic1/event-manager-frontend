@@ -6,19 +6,19 @@ import ModalForm from './Modal'
 import axios from 'axios'
 import useLocalState from '../utils/localState'
 import ModalEvent from './EventModal'
+import Alert from 'react-bootstrap/Alert'
+
 const url = 'https://event-manager-2021.herokuapp.com'
 const tasksUrl = url + '/api/v1/tasks/user/'
 
 const MyCalendar = ({ userId }) => {
   const [isLoading, setIsLoading] = useState(true)
-  const [isError, setIsError] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
   const [clickedEvent, setClickedEvent] = useState({
     title: '',
     start: '',
     end: '',
   })
-  const { showAlert } = useLocalState()
+  const { alert, showAlert } = useLocalState()
   const [events, setEvents] = useState([])
   const [isOpen, setIsOpen] = useState(false)
   const [isClicked, setIsClicked] = useState(false)
@@ -77,8 +77,7 @@ const MyCalendar = ({ userId }) => {
       })
       setEvents([...newData])
     } catch (error) {
-      setIsError(true)
-      setErrorMessage(error.msg)
+      showAlert({ text: error.response.data.msg })
     }
     setIsLoading(false)
   }
@@ -127,7 +126,11 @@ const MyCalendar = ({ userId }) => {
 
   return (
     <>
-      {isError && showAlert({ text: errorMessage })}
+      {alert.show && (
+        <div className='alert'>
+          <Alert variant={alert.type}>{alert.text}</Alert>
+        </div>
+      )}
       {isOpen && (
         <ModalForm handleClose={handleClose} handleSubmit={handleSubmit} />
       )}
